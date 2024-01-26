@@ -1,0 +1,8 @@
+[
+	{
+		"Id": 0,
+        "Name": "Sample Level",
+		"Description": "AAA",
+		"Weight": [1.0, 1.0, 1.0, 1.0]
+	}
+]
