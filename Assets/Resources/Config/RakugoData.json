@@ -1,0 +1,22 @@
+[
+	{
+		"Id": 0,
+		"Content": "AAA",
+		"Influence": {
+            "Hell": 1,
+            "Cold": 1,
+            "Ero": 1,
+            "Nonsense": 1
+        }
+	},
+	{
+		"Id": 1,
+		"Content": "BBB",
+		"Influence": {
+            "Hell": 2,
+            "Cold": 2,
+            "Ero": 2,
+            "Nonsense": 2
+        }
+	}
+]
