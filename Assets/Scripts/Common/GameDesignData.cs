@@ -31,4 +31,20 @@ public class GameDesignData
         var levelData = Resources.Load<TextAsset>("Config/LevelData").text;
         _instance.LevelList = JsonMapper.ToObject<List<Level>>(levelData);
     }
+
+    public static Rakugo GetRakugo(int id)
+    {
+        if (Instance.RakugoList.Count > id)
+            return Instance.RakugoList[id];
+        else
+            return null;
+    }
+
+    public static Level GetLevel(int id)
+    {
+        if (Instance.LevelList.Count > id)
+            return Instance.LevelList[id];
+        else
+            return null;
+    }
 }
