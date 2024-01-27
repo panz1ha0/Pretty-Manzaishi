@@ -7,4 +7,7 @@ public class AudioTrigger : MonoBehaviour
     public void playSFX(string name){
         AudioManager.Instance.PlaySFX(name);
     }
+    public void startPlayBGM(){
+        AudioManager.Instance.InitPlay();
+    }
 }
