@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace Kuchinashi.SceneControl
 {
@@ -14,6 +15,9 @@ namespace Kuchinashi.SceneControl
         private CanvasGroup mCanvasGroup;
         private Slider mProgress;
 
+        private Animator mAnimator;
+        private TMP_Text mLabel;
+
         public static bool CanTransition;
         public static bool IsTransiting;
 
@@ -24,6 +28,9 @@ namespace Kuchinashi.SceneControl
 
             mCanvasGroup = GetComponent<CanvasGroup>();
             mProgress = GetComponentInChildren<Slider>();
+
+            mAnimator = GetComponent<Animator>();
+            mLabel = transform.Find("Label").GetComponent<TMP_Text>();
 
             LoadSceneWithoutConfirm("StartScene");
         }
@@ -224,12 +231,56 @@ namespace Kuchinashi.SceneControl
         {
             mCanvasGroup.blocksRaycasts = targetAlpha == 1;
 
-            while (!Mathf.Approximately(mCanvasGroup.alpha, targetAlpha))
+            if (targetAlpha == 1)
             {
-                mCanvasGroup.alpha = Mathf.MoveTowards(mCanvasGroup.alpha, targetAlpha, 0.1f);
-                yield return null;
+                while (!Mathf.Approximately(mCanvasGroup.alpha, targetAlpha))
+                {
+                    mCanvasGroup.alpha = Mathf.MoveTowards(mCanvasGroup.alpha, targetAlpha, 0.1f);
+                    yield return new WaitForFixedUpdate();
+                }
+
+                mAnimator.enabled = true;
+                mAnimator.speed = 1;
+                mAnimator.Play("LoadingIn", 0, 0f);
+
+                yield return new WaitUntil(() => {return mAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.95f && mAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Appear");});
+                mAnimator.speed = 0;
+                yield return FadeText(mLabel, 1);
             }
+
+            if (targetAlpha == 0)
+            {
+                yield return FadeText(mLabel, 0);
+
+                mAnimator.enabled = true;
+                mAnimator.speed = 1;
+                mAnimator.Play("LoadingOut", 0, 0f);
+
+                yield return new WaitUntil(() => {return mAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.95f && mAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Disappear");});
+                mAnimator.speed = 0;
+
+                while (!Mathf.Approximately(mCanvasGroup.alpha, targetAlpha))
+                {
+                    mCanvasGroup.alpha = Mathf.MoveTowards(mCanvasGroup.alpha, targetAlpha, 0.1f);
+                    yield return new WaitForFixedUpdate();
+                }
+            }
+
             mCanvasGroup.alpha = targetAlpha;
+        }
+
+        IEnumerator FadeText(TMP_Text text, float targetAlpha)
+        {
+            if (text.alpha == targetAlpha) yield break;
+
+            while (!Mathf.Approximately(text.alpha, targetAlpha))
+            {
+                text.alpha = Mathf.MoveTowards(text.alpha, targetAlpha, 0.1f);
+                yield return new WaitForFixedUpdate();
+            }
+
+            text.alpha = targetAlpha;
+            yield break;
         }
     }
 
