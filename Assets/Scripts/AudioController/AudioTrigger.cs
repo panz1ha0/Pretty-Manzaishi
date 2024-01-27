@@ -10,4 +10,12 @@ public class AudioTrigger : MonoBehaviour
     public void startPlayBGM(){
         AudioManager.Instance.InitPlay();
     }
+
+    public void switchMusic(){
+        AudioManager.Instance.SwitchMusic();
+    }
+
+    public void PlayLaughter(){
+        AudioManager.Instance.PlayLaughter();
+    }
 }

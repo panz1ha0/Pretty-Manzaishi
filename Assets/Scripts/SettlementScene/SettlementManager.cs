@@ -14,6 +14,7 @@ public class SettlementManager
 
     public static void SettleGame(int levelId, List<int> rakugoList)
     {
+        AudioManager.Instance.SwitchMusic();
         GameProgressData.FinishRound(levelId, rakugoList);
 
         var levelConfig = GameDesignData.GetLevel(levelId);

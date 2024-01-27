@@ -1581,8 +1581,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxSounds:
-  - name: Laughter
-    clip: {fileID: 8300000, guid: 52bf7d5d5f4aefa4bb4801b76cffab53, type: 3}
   - name: OnHoverCard
     clip: {fileID: 8300000, guid: 4259f948ef53a4a47bc158053c49b3d3, type: 3}
   - name: PlayedCard
@@ -1595,6 +1593,13 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 7f3a832d4263c6d4aa5ec01c1f0f8126, type: 3}
   - name: Click
     clip: {fileID: 8300000, guid: 532e20b39b4065747afd7a7e3cdcb972, type: 3}
+  LaughterSounds:
+  - name: 0
+    clip: {fileID: 8300000, guid: 52bf7d5d5f4aefa4bb4801b76cffab53, type: 3}
+  - name: 1
+    clip: {fileID: 8300000, guid: 132b4c1e0c68569489207b8f8ad19a5a, type: 3}
+  - name: 2
+    clip: {fileID: 8300000, guid: f84cef37ad3ec4e458591c3a173f172e, type: 3}
   musicSounds:
   - name: BGM1
     clip: {fileID: 8300000, guid: de23305d65546d94f805fb1e8d04fa1f, type: 3}
