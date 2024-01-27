@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4737262519157275687
+--- !u!1 &2394655349955359539
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,53 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2016117754725081525}
-  - component: {fileID: 3686475025171491526}
-  - component: {fileID: 2451557824989073830}
-  - component: {fileID: 6561095082653618820}
-  - component: {fileID: 2063016964294246829}
-  - component: {fileID: 1528166351226141165}
-  m_Layer: 5
-  m_Name: CardSample
+  - component: {fileID: 6993955538467364199}
+  - component: {fileID: 6889149377154945100}
+  - component: {fileID: 229967847013410182}
+  m_Layer: 6
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &2016117754725081525
+--- !u!224 &6993955538467364199
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4737262519157275687}
+  m_GameObject: {fileID: 2394655349955359539}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2016117754725081525}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -56.3, y: -119.9}
-  m_SizeDelta: {x: 150, y: 220}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &3686475025171491526
+--- !u!222 &6889149377154945100
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4737262519157275687}
+  m_GameObject: {fileID: 2394655349955359539}
   m_CullTransparentMesh: 1
---- !u!114 &2451557824989073830
+--- !u!114 &229967847013410182
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4737262519157275687}
+  m_GameObject: {fileID: 2394655349955359539}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -78,19 +75,55 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6561095082653618820
-MonoBehaviour:
+--- !u!1 &4737262519157275687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2016117754725081525}
+  - component: {fileID: 3686475025171491526}
+  - component: {fileID: 1780532836797547709}
+  - component: {fileID: 7848520226732435109}
+  - component: {fileID: 5372977764019451784}
+  m_Layer: 6
+  m_Name: CardSample
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2016117754725081525
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4737262519157275687}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ea49d96229090b42b5e2bb68ec9093a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2063016964294246829
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6993955538467364199}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 150, y: 220}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3686475025171491526
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4737262519157275687}
+  m_CullTransparentMesh: 1
+--- !u!114 &1780532836797547709
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,13 +136,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDissolve: 0
+  unborn: 1
+  termOver: 0
   isPreviewing: 0
+  OneHasDissolved: 0
   cardStates:
   - {fileID: 11400000, guid: 54065e6e4e180fd458f4fabe4c0dc6c5, type: 2}
   - {fileID: 11400000, guid: 718a0fce3580e8a419a864a849bd4033, type: 2}
   - {fileID: 11400000, guid: b95c4476989917a40a456a3c6d263869, type: 2}
   - {fileID: 11400000, guid: e498504a5aefddf4f8ff3fd32437f5ad, type: 2}
---- !u!61 &1528166351226141165
+  - {fileID: 11400000, guid: b098fa4fc65298e4a83085621b270510, type: 2}
+--- !u!114 &7848520226732435109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4737262519157275687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ea49d96229090b42b5e2bb68ec9093a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rakugoData:
+    Id: 0
+    Type: 0
+    Content: 
+    Influence:
+      Hell: 0
+      Cold: 0
+      Ero: 0
+      Nonsense: 0
+--- !u!61 &5372977764019451784
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,7 +199,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.50005555, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -152,5 +210,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0001, y: 1}
+  m_Size: {x: 150, y: 220}
   m_EdgeRadius: 0

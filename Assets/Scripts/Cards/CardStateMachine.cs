@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class CardStateMachine: StateMachine
 {
     private Transform card;
+    private Image image;
     CardInput playerInput;
     CardController cardController;
     BaseCard baseCard;
@@ -29,6 +30,7 @@ public class CardStateMachine: StateMachine
     private void Awake()
     {
         card = GetComponent<Transform>();
+        image = GetComponentInChildren<Image>();
         playerInput = GetComponentInParent<CardInput>();
         cardController = GetComponentInParent<CardController>();
         baseCard = GetComponent<BaseCard>();
@@ -36,23 +38,23 @@ public class CardStateMachine: StateMachine
 
         foreach (CardState state in cardStates)
         {
-            state.Init(this, card, playerInput, cardController, baseCard);
+            state.Init(this, card, image, playerInput, cardController, baseCard);
             statetable.Add(state.GetType(), state);
         }
     }
     private void Start()
     {
-        Color currentColor = card.GetComponent<Image>().color;
+        Color currentColor = image.color;
         currentColor.a = 0;
-        card.GetComponent<Image>().color = currentColor;
+        image.color = currentColor;
         SwitchOn(statetable[typeof(CardState_Shuffle)]);
     }
     private void FixedUpdate()
     {
         if (unborn && startDissolve)
         {
-            card.GetComponent<Image>().material = Resources.Load<Material>("Config/CardState/Custom_DissolveShader");
-            material = card.GetComponent<Image>().material;
+            image.material = Resources.Load<Material>("Config/CardState/Custom_DissolveShader");
+            material = image.material;
             unborn = false;
         }
         if (startDissolve && !unborn)

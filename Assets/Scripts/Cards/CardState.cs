@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public interface ICardState
 {
@@ -12,13 +13,15 @@ public class CardState : ScriptableObject, ICardState
 {
     protected CardStateMachine stateMachine;
     protected Transform card;
+    protected Image image;
     protected CardInput playerInput;
     protected CardController cardController;
     protected BaseCard baseCard;
-    public void Init(CardStateMachine stateMachine, Transform card, CardInput playerInput, CardController cardController, BaseCard baseCard)
+    public void Init(CardStateMachine stateMachine, Transform card, Image image, CardInput playerInput, CardController cardController, BaseCard baseCard)
     {
         this.stateMachine = stateMachine;
         this.card = card;
+        this.image = image;
         this.playerInput = playerInput;
         this.cardController = cardController;
         this.baseCard = baseCard;

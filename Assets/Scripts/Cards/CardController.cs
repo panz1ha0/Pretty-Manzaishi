@@ -15,6 +15,8 @@ public class CardController: MonoBehaviour
     CardStateMachine[] cards;
     bool TermOver;
 
+    public RectTransform rectTransform;
+
     private void Awake()
     {
         RakugoList = GameDesignData.Instance.RakugoList;
@@ -25,17 +27,20 @@ public class CardController: MonoBehaviour
         {
             Debug.Log(item.Id);
         }
+
+        rectTransform = GetComponent<RectTransform>();
     }
     private void Update()
     {
         CheckHoverInThisCrd(transform.gameObject);
         //Debug.Log("isPreviewing: " + isPreviewing);
     }
+
     private void FixedUpdate()
     {
         foreach (CardStateMachine item in cards)
         {
-            if (item.GetCurrentState().GetType() == typeof(CardState_Casted)) TermOver = true;
+            if (item.GetCurrentState()?.GetType() == typeof(CardState_Casted)) TermOver = true;
         }
         if (TermOver)
         {
@@ -56,16 +61,22 @@ public class CardController: MonoBehaviour
         CardStateMachine card;
         PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
         pointerEventData.position = Input.mousePosition;
+
+        Vector2 rayTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D[] results = Physics2D.RaycastAll(rayTarget, Vector2.zero, 100f, LayerMask.GetMask("Card"));
+
         GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();
-        List<RaycastResult> results = new List<RaycastResult>();
-        gr.Raycast(pointerEventData, results);
-        if (results.Count != 0)
+        // List<RaycastResult> results = new List<RaycastResult>();
+        // gr.Raycast(pointerEventData, results);
+
+        if (results.Length != 0)
         {
-            foreach (RaycastResult item in results)
+            foreach (var item in results)
             {
                 //Debug.Log(item.gameObject.name);
-                if(item.gameObject.TryGetComponent<CardStateMachine>(out card))
+                if(item.collider.TryGetComponent<CardStateMachine>(out card))
                 {
+                    Debug.Log("Yeah");
                     card.isPreviewing = true;
                 }
             }

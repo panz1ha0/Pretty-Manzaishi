@@ -90,6 +90,8 @@ public class StartSceneController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         mCanvasAnimator.speed = 0;
+
+        SceneControl.SwitchSceneWithoutConfirm("MainScene");
     }
 
     IEnumerator ZukanCoroutine()

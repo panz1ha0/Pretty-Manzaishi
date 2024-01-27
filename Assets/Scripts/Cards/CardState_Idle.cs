@@ -16,11 +16,11 @@ public class CardState_Idle : CardState
     public override void Enter()
     {
         base.Enter();
-        Color currentColor = card.GetComponent<Image>().color;
+        Color currentColor = image.color;
         currentColor.a = 100;
-        card.GetComponent<Image>().color = currentColor;
-        material = card.GetComponent<Image>().material;
-        card.localScale = Vector3.one;
+        image.color = currentColor;
+        material = image.material;
+        image.transform.localScale = Vector3.one;
         currentPosition = card.localPosition;
 
         material.SetFloat("_BurnAmount", 0);

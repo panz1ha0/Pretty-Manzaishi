@@ -16,7 +16,7 @@ public class CardState_Preview : CardState
         base.Enter();
         //canvas = card.GetComponent<Canvas>();
         //canvas.sortingOrder = 1;
-        card.localScale = new Vector3(PREVIEW_SCALE, PREVIEW_SCALE, PREVIEW_SCALE);
+        image.transform.localScale = new Vector3(PREVIEW_SCALE, PREVIEW_SCALE, PREVIEW_SCALE);
         currentPosition = card.localPosition;
         targetPositionY = currentPosition.y + upmove;
     }

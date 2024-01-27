@@ -14,7 +14,7 @@ public class CardState_Casted : CardState
     {
         base.Enter();
         stateMachine.SetBurnSpeed(DissolveSpeed);
-        card.localScale = new Vector3(Scale, Scale, Scale);
+        // card.localScale = new Vector3(Scale, Scale, Scale);
         stateMachine.StartDissolve(true);
     }
     public override void LogicUpdate()

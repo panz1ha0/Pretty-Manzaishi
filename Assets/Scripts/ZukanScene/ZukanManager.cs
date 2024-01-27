@@ -1,14 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using Kuchinashi.SceneControl;
 
 public class ZukanManager : MonoBehaviour
 {
     public GameObject[] cardPrefabs;
     private int currentPage = 0;
 
+    private Button mHome;
+    private Button mNextPage;
+    private Button mPrevPage;
+    private TMP_Text mPageNumber;
+
+    private Transform mContent;
+
     private void Awake()
     {
+        currentPage = 0;
+
+        mHome = transform.Find("Home").GetComponent<Button>();
+        mNextPage = transform.Find("Next").GetComponent<Button>();
+        mPrevPage = transform.Find("Prev").GetComponent<Button>();
+
+        mPageNumber = transform.Find("Page").GetComponent<TMP_Text>();
+
+        mContent = transform.Find("Content");
+
+        mHome.onClick.AddListener(() => {
+            SceneControl.SwitchSceneWithoutConfirm("StartScene");
+        });
+        mNextPage.onClick.AddListener(() => {
+            currentPage = currentPage < GameDesignData.Instance.RakugoList.Count / 8 ? currentPage + 1 : currentPage;
+            GenerateCards();
+        });
+        mPrevPage.onClick.AddListener(() => {
+            currentPage = currentPage > 0 ? currentPage - 1 : currentPage;
+            GenerateCards();
+        });
+
         GenerateCards();
     }
 
@@ -26,14 +58,19 @@ public class ZukanManager : MonoBehaviour
 
     private void GenerateCards()
     {
-        foreach (var child in transform.GetComponentsInChildren<CardController>())
+        mNextPage.gameObject.SetActive(currentPage < GameDesignData.Instance.RakugoList.Count / 8);
+        mPrevPage.gameObject.SetActive(currentPage > 0);
+
+        mPageNumber.text = $"{currentPage + 1} / {GameDesignData.Instance.RakugoList.Count / 8 + 1}";
+
+        foreach (var child in transform.GetComponentsInChildren<Kuchinashi.CardController>())
         {
             Destroy(child.gameObject);
         }
 
         foreach (var rakugo in GenerateList(currentPage))
         {
-            Instantiate(cardPrefabs[(int) rakugo.Type], transform).GetComponent<CardController>().Init(rakugo);
+            Instantiate(cardPrefabs[(int) rakugo.Type], mContent).GetComponent<Kuchinashi.CardController>().Init(rakugo);
         }
     }
 }

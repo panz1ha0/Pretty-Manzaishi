@@ -25,9 +25,9 @@ public class CardState_Shuffle: CardState
         onPosition = currentPosition == position;
         if (onPosition)
         {
-            Color currentColor = card.GetComponent<Image>().color;
+            Color currentColor = image.color;
             currentColor.a = 0;
-            card.GetComponent<Image>().color = currentColor;
+            image.color = currentColor;
         }
         if (!stateMachine.termOver && stateMachine.unborn &&onPosition)
         {

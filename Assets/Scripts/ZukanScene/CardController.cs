@@ -4,21 +4,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CardController : MonoBehaviour
+namespace Kuchinashi
 {
-    private Rakugo data;
-    private Button button;
-    private TMP_Text content;
-
-    private void Awake()
+    public class CardController : MonoBehaviour
     {
-        button = GetComponent<Button>();
-        content = GetComponentInChildren<TMP_Text>();
+        private Rakugo data;
+        private Button button;
+        private TMP_Text content;
+
+        private void Awake()
+        {
+            button = GetComponent<Button>();
+            content = GetComponentInChildren<TMP_Text>();
+        }
+
+        public void Init(Rakugo rakugo)
+        {
+            data = rakugo;
+            content.SetText($"{rakugo.Content.Substring(0, 18)}...");
+
+            button.onClick.AddListener(() => DetailPanelController.ShowDetail(data.Id));
+        }
     }
 
-    public void Init(Rakugo rakugo)
-    {
-        data = rakugo;
-        content.SetText($"{rakugo.Content.Substring(0, 18)}...");
-    }
 }
