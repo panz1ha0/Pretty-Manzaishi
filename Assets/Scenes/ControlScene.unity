@@ -1406,13 +1406,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4ed018fbd7313c4998eab69631e5598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxSounds: []
+  sfxSounds:
+  - name: alertTooHigh
+    clip: {fileID: 8300000, guid: a4fee8db506f8af45ab09f1bb62f1306, type: 3}
+  - name: alertTooLow
+    clip: {fileID: 8300000, guid: 8cc00e0199a290248946fb71567b4ca7, type: 3}
+  - name: click
+    clip: {fileID: 8300000, guid: 98ee2ee38c2d47b4797db69c78c8629b, type: 3}
+  - name: laughter
+    clip: {fileID: 8300000, guid: bb95f1105f3e69c4084f95166f5ca51c, type: 3}
+  - name: onHover
+    clip: {fileID: 8300000, guid: d01da77bfb7a6d44b8433795ff73a1b5, type: 3}
+  - name: played
+    clip: {fileID: 8300000, guid: 299dbc5f0cb8a9c499da7b66c8a0edff, type: 3}
+  - name: shuffle
+    clip: {fileID: 8300000, guid: 2d094e5c39951da419d830fec7c31aa1, type: 3}
   musicSounds:
-    name: 
-    clip: {fileID: 0}
+  - name: bgm1
+    clip: {fileID: 8300000, guid: c6c723fa451e35d4b9d7c90341c07930, type: 3}
+  - name: bgm2
+    clip: {fileID: 8300000, guid: 1774f25816d5b9c408b69e3ab60b68b3, type: 3}
   musicSource1: {fileID: 1228918942}
   musicSource2: {fileID: 297494108}
-  sfxSource: {fileID: 0}
+  sfxSource: {fileID: 749233707}
 --- !u!4 &1686312917
 Transform:
   m_ObjectHideFlags: 0

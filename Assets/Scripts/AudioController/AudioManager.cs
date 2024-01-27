@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
-    public Boolean isWithoutEffect;
+    Boolean isWithoutEffect;
     public static AudioManager Instance;
     public Sound[] sfxSounds;
     public Sound[] musicSounds;
