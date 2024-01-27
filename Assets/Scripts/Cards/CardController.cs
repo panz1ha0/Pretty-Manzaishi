@@ -3,6 +3,7 @@ using Kuchinashi;
 using Kuchinashi.SceneControl;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -25,6 +26,7 @@ public class CardController: MonoBehaviour
     private bool first;
     private bool startFirstTurn => duration >= 2.0f;
 
+    public Sprite[] sprites;
     public RectTransform rectTransform;
 
     private void Awake()
@@ -131,6 +133,28 @@ public class CardController: MonoBehaviour
     }
     public void MarkUsedCard(int id) => UsedCards.Add(id);
     public void UpdateElements(Element element) => DataRepeater.Instance.CurrentElements += element;
+    public void SetCardContent(Rakugo rakugo, TMP_Text content) => content.SetText($"{rakugo.Content.Substring(0, 18)}...");
+    public void SetCardImage(Type type, Image image)
+    {
+        switch (type)
+        {
+            case Type.Hell:
+                image.sprite = sprites[2];
+                break;
+            case Type.Cold:
+                image.sprite = sprites[0];
+                break;
+            case Type.Ero:
+                image.sprite = sprites[1];
+                break;
+            case Type.Nonsense:
+                image.sprite = sprites[3];
+                break;
+            default:
+                break;
+        }
+    }
+
     private List<Rakugo> Dealer()
     {
         List<int> temp = new List<int>();

@@ -19,6 +19,9 @@ public class CardState_Idle : CardState
         Color currentColor = image.color;
         currentColor.a = 100;
         image.color = currentColor;
+        Color textColor = content.color;
+        textColor.a = 100;
+        content.color = textColor;
         material = image.material;
         image.transform.localScale = Vector3.one;
         currentPosition = card.localPosition;

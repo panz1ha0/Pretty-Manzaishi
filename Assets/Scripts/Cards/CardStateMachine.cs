@@ -6,11 +6,13 @@ using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
 
 public class CardStateMachine: StateMachine
 {
     private Transform card;
     private Image image;
+    private TMP_Text content;
     private CardState lastState = null;
     CardInput playerInput;
     CardController cardController;
@@ -43,14 +45,11 @@ public class CardStateMachine: StateMachine
         baseCard.Init();
     }
 
-    public void LoadCard(Rakugo rakugo)
-    {
-        baseCard.rakugoData = rakugo;
-    }
-
     public void Restart(Rakugo rakugo)
     {
         LoadCard(rakugo);
+        cardController.SetCardImage(rakugo.Type, image);
+        cardController.SetCardContent(rakugo, content);
         SwitchState(typeof(CardState_Shuffle));
     }
 
@@ -58,6 +57,7 @@ public class CardStateMachine: StateMachine
     {
         card = GetComponent<Transform>();
         image = GetComponentInChildren<Image>();
+        content = GetComponentInChildren<TMP_Text>();
         playerInput = GetComponentInParent<CardInput>();
         cardController = GetComponentInParent<CardController>();
         baseCard = GetComponent<BaseCard>();
@@ -65,7 +65,7 @@ public class CardStateMachine: StateMachine
 
         foreach (CardState state in cardStates)
         {
-            state.Init(this, card, image, playerInput, cardController, baseCard);
+            state.Init(this, card, image, content, playerInput, cardController, baseCard);
             statetable.Add(state.GetType(), state);
         }
     }
@@ -91,12 +91,19 @@ public class CardStateMachine: StateMachine
             Debug.Log(DissolveEnd());
         }
     }
+    public void LoadCard(Rakugo rakugo)
+    {
+        baseCard.rakugoData = rakugo;
+    }
     IEnumerator Dissolve()
     {
         while (BurnAmount < 1)
         {
             BurnAmount += BurnSpeed * Time.deltaTime;
             material.SetFloat("_BurnAmount", BurnAmount);
+            Color textColor = content.color;
+            textColor.a -= BurnSpeed * 255.0f * Time.deltaTime;
+            content.color = textColor;
             yield return null;
         }
     }
