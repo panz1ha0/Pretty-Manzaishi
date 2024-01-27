@@ -22,6 +22,7 @@ public class SettlementManager
         foreach (var rakugo in rakugoList)
         {
             totalInfluence += GameDesignData.GetRakugo(rakugo).Influence;
+            GameProgressData.UnlockRakugo(rakugo);
         }
 
         var score = levelConfig.Weight[0] * totalInfluence.Hell

@@ -535,7 +535,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327040596}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 9a4893942888d2a499fa5b8f56213a6c, type: 2}
   m_CullingMode: 0
@@ -771,8 +771,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u5C11\u5973\u6298\u5BFF\u4E2D\u2026\u2026"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9723ad50769dd5e4bb2b4770c7ffd2d8, type: 2}
+  m_sharedMaterial: {fileID: -6542964388113849868, guid: 9723ad50769dd5e4bb2b4770c7ffd2d8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
