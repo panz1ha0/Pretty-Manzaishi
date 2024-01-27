@@ -14,22 +14,25 @@ public class CardState_Shuffle: CardState
         base.Enter();
         currentPosition = card.localPosition;
     }
-    public override void Exit()
-    {
-        base.Exit();
-    }
     public override void LogicUpdate()
     {
         base.LogicUpdate();
         currentPosition = Vector3.MoveTowards(currentPosition, position, speed * Time.deltaTime);
         onPosition = currentPosition == position;
-        if (onPosition)
+        if (stateMachine.GetLastState()?.GetType() == typeof(CardState_Casted))
         {
             Color currentColor = image.color;
             currentColor.a = 0;
             image.color = currentColor;
         }
-        if (!stateMachine.termOver && stateMachine.unborn &&onPosition)
+        if (onPosition)
+        {
+            Color currentColor = image.color;
+            currentColor.a = 0;
+            image.color = currentColor;
+            stateMachine.turnEndFinished = true;
+        }
+        if (!stateMachine.turnEnd && stateMachine.unburn && onPosition)
         {
             stateMachine.SwitchState(typeof(CardState_Idle));
         }

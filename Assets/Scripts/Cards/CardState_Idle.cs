@@ -33,7 +33,7 @@ public class CardState_Idle : CardState
         {
             stateMachine.SwitchState(typeof(CardState_Preview));
         }
-        if (stateMachine.termOver && stateMachine.unborn)
+        if (stateMachine.turnEnd && stateMachine.unburn)
         {
             stateMachine.SwitchState(typeof(CardState_Shuffle));
         }

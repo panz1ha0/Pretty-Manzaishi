@@ -771,8 +771,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u5C11\u5973\u6298\u5BFF\u4E2D\u2026\u2026"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 65ef31e5a2e817a419d74bdcc32a8c78, type: 2}
-  m_sharedMaterial: {fileID: 81736792606942013, guid: 65ef31e5a2e817a419d74bdcc32a8c78, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1154,6 +1154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelCount: 0
+  CurrentLevelId: 0
   CurrentElements:
     Hell: 0
     Cold: 0

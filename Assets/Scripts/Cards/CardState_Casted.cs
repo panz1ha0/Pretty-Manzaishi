@@ -20,13 +20,11 @@ public class CardState_Casted : CardState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (stateMachine.termOver && !stateMachine.unborn)
+        if (stateMachine.DissolveEnd() && !stateMachine.unburn)
         {
-            if (stateMachine.DissolveEnd())
-            {
-                cardController.MarkUsedCard(baseCard.rakugoData.Id);
-                stateMachine.SwitchState(typeof(CardState_Shuffle));
-            }
+            cardController.MarkUsedCard(baseCard.rakugoData.Id);
+            cardController.UpdateElements(baseCard.rakugoData.Influence);
+            stateMachine.SwitchState(typeof(CardState_Shuffle));
         }
     }
     public override void PhysicsUpdate()

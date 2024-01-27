@@ -11,6 +11,7 @@ public class CardStateMachine: StateMachine
 {
     private Transform card;
     private Image image;
+    private CardState lastState = null;
     CardInput playerInput;
     CardController cardController;
     BaseCard baseCard;
@@ -19,14 +20,40 @@ public class CardStateMachine: StateMachine
     float BurnSpeed = 0.5f;
     public bool startDissolve;
     Material material;
-    public bool unborn = true;
-    public bool termOver;
+    public bool unburn = true;
+    public bool turnEnd;
+    public bool turnEndFinished;
     public bool isPreviewing;
     public bool OneHasDissolved;
     public void StartDissolve(bool flag) => startDissolve = flag;
     public bool DissolveEnd() => !startDissolve;
     public void SetBurnSpeed(float burnSpeed) => BurnSpeed = burnSpeed;
     public CardState[] cardStates;
+
+    public void Init()
+    {
+        unburn = true;
+        turnEnd = false;
+        turnEndFinished = false;
+        isPreviewing = false;
+        OneHasDissolved = false;
+        startDissolve = false;
+        image.material = null;
+        BurnAmount = 0;
+        baseCard.Init();
+    }
+
+    public void LoadCard(Rakugo rakugo)
+    {
+        baseCard.rakugoData = rakugo;
+    }
+
+    public void Restart(Rakugo rakugo)
+    {
+        LoadCard(rakugo);
+        SwitchState(typeof(CardState_Shuffle));
+    }
+
     private void Awake()
     {
         card = GetComponent<Transform>();
@@ -47,20 +74,21 @@ public class CardStateMachine: StateMachine
         Color currentColor = image.color;
         currentColor.a = 0;
         image.color = currentColor;
-        SwitchOn(statetable[typeof(CardState_Shuffle)]);
+        //SwitchOn(statetable[typeof(CardState_Shuffle)]);
     }
     private void FixedUpdate()
     {
-        if (unborn && startDissolve)
+        if (unburn && startDissolve)
         {
-            image.material = Resources.Load<Material>("Config/CardState/Custom_DissolveShader");
-            material = image.material;
-            unborn = false;
+            material = Resources.Load<Material>("Config/CardState/Custom_DissolveShader");
+            image.material = material;
+            unburn = false;
         }
-        if (startDissolve && !unborn)
+        if (startDissolve && !unburn)
         {
             StartCoroutine(Dissolve());
             startDissolve = material.GetFloat("_BurnAmount") < 1;
+            Debug.Log(DissolveEnd());
         }
     }
     IEnumerator Dissolve()
@@ -71,5 +99,13 @@ public class CardStateMachine: StateMachine
             material.SetFloat("_BurnAmount", BurnAmount);
             yield return null;
         }
+    }
+    public CardState GetLastState()
+    {
+        return lastState;
+    }
+    public void SetLastState(CardState cardState)
+    {
+        this.lastState = cardState;
     }
 }

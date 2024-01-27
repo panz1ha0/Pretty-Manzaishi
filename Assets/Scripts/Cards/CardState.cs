@@ -28,12 +28,12 @@ public class CardState : ScriptableObject, ICardState
     }
     public virtual void Enter()
     {
-        Debug.Log(card.gameObject.name + " enter state: " + this);
+        //Debug.Log(card.gameObject.name + " enter state: " + this);
     }
 
     public virtual void Exit()
     {
-        
+        stateMachine.SetLastState(this);
     }
 
     public virtual void LogicUpdate()

@@ -1,4 +1,6 @@
 using JetBrains.Annotations;
+using Kuchinashi;
+using Kuchinashi.SceneControl;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -12,8 +14,16 @@ public class CardController: MonoBehaviour
     List<Rakugo> RakugoList;
     List<int> UsedCards;
     CardInput cardInput;
+    int level;
     CardStateMachine[] cards;
-    bool TermOver;
+    bool TurnEnd;
+    const int MAX_TURN = 5;
+    int TurnNumber = 0;
+
+    private float startTime;
+    private float duration => Time.time - startTime;
+    private bool first;
+    private bool startFirstTurn => duration >= 2.0f;
 
     public RectTransform rectTransform;
 
@@ -23,37 +33,67 @@ public class CardController: MonoBehaviour
         UsedCards = new List<int>(RakugoList.Count);
         cardInput = GetComponent<CardInput>();
         cards = GetComponentsInChildren<CardStateMachine>();
-        foreach (Rakugo item in Dealer())
+        first = true;
+        foreach (CardStateMachine item in cards)
         {
-            Debug.Log(item.Id);
+            item.Init();
         }
-
+        if (DataRepeater.Instance.CurrentElements == null)
+        {
+            DataRepeater.Instance.CurrentElements = new Element();
+            //DataRepeater.Instance.CurrentElements.Ero = 0;
+            //DataRepeater.Instance.CurrentElements.Hell = 0;
+            //DataRepeater.Instance.CurrentElements.Cold = 0;
+            //DataRepeater.Instance.CurrentElements.Nonsense = 0;
+        }
+        if (GameProgressData.Instance.RoundDataList.Count == 0)
+        {
+            int radNum = Random.Range(0, 5);
+            DataRepeater.Instance.CurrentLevelId = radNum;
+        }
+        else
+        {
+            level = DataRepeater.Instance.CurrentLevelId;
+        }
         rectTransform = GetComponent<RectTransform>();
+    }
+    private void Start()
+    {
+        startTime = Time.time;
     }
     private void Update()
     {
+        if(startFirstTurn && first)
+        {
+            List<Rakugo> drawCard = Dealer();
+            for (int i = 0; i < cards.Length; i++)
+            {
+                cards[i].Restart(drawCard[i]);
+            }
+            first = false;
+        }
         CheckHoverInThisCrd(transform.gameObject);
         //Debug.Log("isPreviewing: " + isPreviewing);
     }
 
     private void FixedUpdate()
     {
+        if (!startFirstTurn) return;
         foreach (CardStateMachine item in cards)
         {
-            if (item.GetCurrentState()?.GetType() == typeof(CardState_Casted)) TermOver = true;
+            if (item.GetCurrentState()?.GetType() == typeof(CardState_Shuffle) && item.GetLastState()?.GetType() == typeof(CardState_Casted)) TurnEnd = true;
         }
-        if (TermOver)
+        if (TurnEnd)
         {
-            //Debug.Log("A");
             foreach (CardStateMachine item in cards)
             {
-                item.termOver = true;
+                item.turnEnd = true;
             }
-            foreach (CardStateMachine item in cards)
+            StartCoroutine(TurnEndInterval());
+            if(TurnNumber == MAX_TURN)
             {
-                Debug.Log(item.gameObject.name + ": " + item.unborn);
+                SceneControl.SwitchSceneWithoutConfirm("SettlementScene", () => { SettlementManager.SettleGame(DataRepeater.Instance.CurrentLevelId, UsedCards); });
             }
-            TermOver = false;
         }
     }
     private void CheckHoverInThisCrd(GameObject canvas)
@@ -73,10 +113,10 @@ public class CardController: MonoBehaviour
         {
             foreach (var item in results)
             {
-                //Debug.Log(item.gameObject.name);
+                //Debug.Log(item.collider.gameObject.name);
                 if(item.collider.TryGetComponent<CardStateMachine>(out card))
                 {
-                    Debug.Log("Yeah");
+                    //Debug.Log("Yeah");
                     card.isPreviewing = true;
                 }
             }
@@ -90,13 +130,14 @@ public class CardController: MonoBehaviour
         }
     }
     public void MarkUsedCard(int id) => UsedCards.Add(id);
-    public List<Rakugo> Dealer()
+    public void UpdateElements(Element element) => DataRepeater.Instance.CurrentElements += element;
+    private List<Rakugo> Dealer()
     {
         List<int> temp = new List<int>();
         List<Rakugo> rakugos = new List<Rakugo>();
         while (true)
         {
-            int a = Random.Range(0, 48);
+            int a = Random.Range(0, 49);
             foreach (int item in UsedCards)
             {
                 if (a == item) continue;
@@ -109,5 +150,26 @@ public class CardController: MonoBehaviour
             rakugos.Add(RakugoList[a]);
             if (rakugos.Count == 3) return rakugos;
         }
+    }
+
+    IEnumerator TurnEndInterval()
+    {
+        while (TurnEnd)
+        {
+            if(cards[0].turnEndFinished && cards[1].turnEndFinished && cards[2].turnEndFinished)
+            {
+                TurnNumber += 1;
+                Debug.Log(TurnNumber);
+                TurnEnd = false;
+                List<Rakugo> drawCard = Dealer();
+                for (int i = 0; i < cards.Length; i++)
+                {
+                    cards[i].Init();
+                    cards[i].Restart(drawCard[i]);
+                }
+            }
+            yield return null;
+        }
+        
     }
 }

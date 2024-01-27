@@ -16,6 +16,8 @@ namespace Kuchinashi
 
         public int LevelCount = 0;
 
+        public int CurrentLevelId = 0;
+
         public Element CurrentElements;
         public int CurrentFans;
     }

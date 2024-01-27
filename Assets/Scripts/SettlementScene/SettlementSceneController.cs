@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Kuchinashi;
+using Kuchinashi.SceneControl;
+using Unity.Mathematics;
+using Random = UnityEngine.Random;
 
 public partial class SettlementSceneController : MonoBehaviour
 {
@@ -48,8 +51,6 @@ public partial class SettlementSceneController : MonoBehaviour
         mNextLevelButton = transform.Find("Next").GetComponent<Button>();
 
         Initialize();
-
-        Action(10000, 10000, -5000, "喂喂，超不妙的啊。这不是根本没有让观众 GET 到笑点嘛……", 0);
     }
 
     private void Initialize()
@@ -84,6 +85,7 @@ public partial class SettlementSceneController : MonoBehaviour
             var animator = _instance.mNextLevelButton.GetComponent<Animator>();
             animator.enabled = true;
             animator.Play("Pressed");
+            SceneControl.SwitchSceneWithoutConfirm("MainScene", () => { DataRepeater.Instance.CurrentLevelId = nextLevelId; });
         });
     }
 
