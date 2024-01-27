@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Larvend.Kanata
+namespace Kuchinashi
 {
     public class DataRepeater : MonoBehaviour
     {

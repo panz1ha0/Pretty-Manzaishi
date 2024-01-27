@@ -13,6 +13,7 @@ public class GameProgressData
     }
 
     public List<RoundData> RoundDataList = new List<RoundData>();
+    public Dictionary<int, bool> UnlockedRakugo = new Dictionary<int, bool>();
 
     public static void FinishRound(int levelId, List<int> usedRakugoId)
     {
@@ -26,6 +27,11 @@ public class GameProgressData
     public static RoundData GetLastRoundData()
     {
         return Instance.RoundDataList.Count == 0 ? null : Instance.RoundDataList[Instance.RoundDataList.Count - 1];
+    }
+
+    public static void UnlockRakugo(int rakugoId)
+    {
+        Instance.UnlockedRakugo[rakugoId] = true;
     }
 }
 
