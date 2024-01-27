@@ -1,8 +1,32 @@
 [
 	{
 		"Id": 0,
-        "Name": "Sample Level",
-		"Description": "AAA",
+        "Name": "T⭕d Talk",
+		"Description": "一群闲得没事干觉得自己很聪明的人听公开课的地方。",
 		"Weight": [1.0, 1.0, 1.0, 1.0]
+	},
+	{
+		"Id": 1,
+        "Name": "四chan",
+		"Description": "由某知名线上匿名论坛发展而来的线下场地，里面老哥是真能处。",
+		"Weight": [1.3, 0.7, 1.2, 0.8]
+	},
+	{
+		"Id": 2,
+        "Name": "塔克拉玛撒哈拉",
+		"Description": "真是太烧辣≧ —— ≦",
+		"Weight": [0.6, 1.7, 0.5, 1.0]
+	},
+	{
+		"Id": 3,
+        "Name": "大鹏转转转酒吧",
+		"Description": "你想要的♂我们都有~",
+		"Weight": [0.8, 0.8, 1.6, 0.9]
+	},
+	{
+		"Id": 4,
+        "Name": "爆笑campus",
+		"Description": "地摊漫画的现实取材地",
+		"Weight": [1.0, 1.1, 1.1, 1.4]
 	}
 ]
