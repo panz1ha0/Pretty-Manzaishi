@@ -14,6 +14,7 @@ public class SettlementManager
 
     public static void SettleGame(int levelId, List<int> rakugoList)
     {
+        AudioManager.Instance.SwitchMusic();
         GameProgressData.FinishRound(levelId, rakugoList);
 
         var levelConfig = GameDesignData.GetLevel(levelId);
@@ -22,6 +23,7 @@ public class SettlementManager
         foreach (var rakugo in rakugoList)
         {
             totalInfluence += GameDesignData.GetRakugo(rakugo).Influence;
+            GameProgressData.UnlockRakugo(rakugo);
         }
 
         var score = levelConfig.Weight[0] * totalInfluence.Hell

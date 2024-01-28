@@ -257,8 +257,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1 / 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 65ef31e5a2e817a419d74bdcc32a8c78, type: 2}
-  m_sharedMaterial: {fileID: 81736792606942013, guid: 65ef31e5a2e817a419d74bdcc32a8c78, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -467,8 +467,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u7B11\u8BDD\u5185\u5BB9\u7B11\u8BDD\u5185\u5BB9\u7B11\u8BDD\u5185\u5BB9\u7B11\u8BDD\u5185\u5BB9\u7B11\u8BDD\u5185\u5BB9\u7B11\u8BDD\u5185\u5BB9"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 65ef31e5a2e817a419d74bdcc32a8c78, type: 2}
-  m_sharedMaterial: {fileID: 81736792606942013, guid: 65ef31e5a2e817a419d74bdcc32a8c78, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -698,7 +698,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 178584346}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4083492984219890779, guid: 629af730c5c01a74788e68335f71b168, type: 3}
+        m_TargetAssemblyTypeName: AudioTrigger, Assembly-CSharp
+        m_MethodName: playSFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Click
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &178584346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -873,8 +885,8 @@ MonoBehaviour:
     \\n\u4E8E\u662F\u4ED6\u6C14\u6C1B\u7684\u8DD1\u53BB\u548C\u4E0A\u5E1D\u7406\u8BBA\u8BF4\uFF1A\u201C\u4E0A\u5E1D\u554A\uFF0C\u4F60\u5F88\u4E0D\u516C\u5E73\uFF0C\u4E3A\u4EC0\u4E48\u6211\u90A3\u4E48\u5FE0\u5FC3\u7684\u4E3A\u60A8\u5E03\u9053\u4E0E\u4F20\u6559\u5374\u4E0B\u4E86\u5730\u72F1\uFF0C\u90A3\u5DF4\u58EB\u53F8\u673A\u5F00\u8F66\u6A6B\u51B2\u76F4\u649E\u7684\u5374\u4E0A\u4E86\u5929\u5802\uFF0C\u96BE\u9053\u60A8\u6C92\u6709\u89C2\u5BDF\u5230\u5417\uFF1F\u201D
     \\n\u4E0A\u5E1D\u8BF4\uFF1A\u201C\u6709\u554A\uFF01\u4F46\u662F\u4F60\u6BCF\u6B21\u5728\u5E03\u9053\u4E0E\u4F20\u6559\u65F6\uFF0C\u53F0\u4E0B\u7684\u6559\u53CB\u5168\u90FD\u7761\u7740\u4E86\uFF0C\u800C\u5DF4\u58EB\u53F8\u673A\u6BCF\u6B21\u8F7D\u7740\u6559\u53CB\u65F6\uFF0C\u5168\u8F66\u7684\u6559\u53CB\u90FD\u5728\u8654\u8BDA\u7684\u7948\u7977\u7740\uFF0C\u6240\u4EE5....\u201D"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 65ef31e5a2e817a419d74bdcc32a8c78, type: 2}
-  m_sharedMaterial: {fileID: 81736792606942013, guid: 65ef31e5a2e817a419d74bdcc32a8c78, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1501,6 +1513,7 @@ MonoBehaviour:
   - {fileID: 2074893295788305581, guid: 0776a6a2e82b09d4fab519eaec4ef418, type: 3}
   - {fileID: 5621783142717151382, guid: 7b266f52d9e817d449e9dc0bb549b997, type: 3}
   - {fileID: 375706543590181011, guid: ac9ed06f64bb354498812c5391c97ec7, type: 3}
+  - {fileID: 2074893295788305581, guid: b8f02f362c989b641970eab132cf5258, type: 3}
 --- !u!1 &992158749
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,7 +1917,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1578225764}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4083492984219890779, guid: 629af730c5c01a74788e68335f71b168, type: 3}
+        m_TargetAssemblyTypeName: AudioTrigger, Assembly-CSharp
+        m_MethodName: playSFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Click
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1578225764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2331,7 +2356,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2091651601}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4083492984219890779, guid: 629af730c5c01a74788e68335f71b168, type: 3}
+        m_TargetAssemblyTypeName: AudioTrigger, Assembly-CSharp
+        m_MethodName: playSFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Click
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2091651601
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -63,14 +63,23 @@ public class ZukanManager : MonoBehaviour
 
         mPageNumber.text = $"{currentPage + 1} / {GameDesignData.Instance.RakugoList.Count / 8 + 1}";
 
-        foreach (var child in transform.GetComponentsInChildren<Kuchinashi.CardController>())
+        var count = mContent.childCount;
+        for (int i = 0; i < count; i++)
         {
-            Destroy(child.gameObject);
+            Destroy(mContent.GetChild(i).gameObject);
         }
 
         foreach (var rakugo in GenerateList(currentPage))
         {
-            Instantiate(cardPrefabs[(int) rakugo.Type], mContent).GetComponent<Kuchinashi.CardController>().Init(rakugo);
+            if (GameProgressData.Instance.UnlockedRakugo.TryGetValue(rakugo.Id, out bool value))
+            {
+                if (value)
+                {
+                    Instantiate(cardPrefabs[(int) rakugo.Type], mContent).GetComponent<Kuchinashi.CardController>().Init(rakugo);
+                    continue;
+                }
+            }
+            Instantiate(cardPrefabs[4], mContent);
         }
     }
 }

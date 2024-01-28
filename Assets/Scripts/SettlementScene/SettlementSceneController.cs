@@ -81,6 +81,7 @@ public partial class SettlementSceneController : MonoBehaviour
         _instance.mNextLevelButton.interactable = true;
         _instance.mNextLevelButton.onClick.AddListener(() =>
         {
+            AudioManager.Instance.SwitchMusic();
             _instance.mNextLevelButton.interactable = false;
             var animator = _instance.mNextLevelButton.GetComponent<Animator>();
             animator.enabled = true;
