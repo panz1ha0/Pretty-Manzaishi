@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 377f93d713ecb4c41bbc4a15db81dd0a, type: 3}
   m_Name: CardState_Casted 1
   m_EditorClassIdentifier: 
+  SFXname: PlayedCard
   DissolveSpeed: 0.5
   position: {x: 150, y: 150, z: 0}
   Scale: 2

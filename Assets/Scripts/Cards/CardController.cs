@@ -43,10 +43,10 @@ public class CardController: MonoBehaviour
         if (DataRepeater.Instance.CurrentElements == null)
         {
             DataRepeater.Instance.CurrentElements = new Element();
-            //DataRepeater.Instance.CurrentElements.Ero = 0;
-            //DataRepeater.Instance.CurrentElements.Hell = 0;
-            //DataRepeater.Instance.CurrentElements.Cold = 0;
-            //DataRepeater.Instance.CurrentElements.Nonsense = 0;
+            DataRepeater.Instance.CurrentElements.Ero = 0;
+            DataRepeater.Instance.CurrentElements.Hell = 0;
+            DataRepeater.Instance.CurrentElements.Cold = 0;
+            DataRepeater.Instance.CurrentElements.Nonsense = 0;
         }
         if (GameProgressData.Instance.RoundDataList.Count == 0)
         {
@@ -94,7 +94,8 @@ public class CardController: MonoBehaviour
             StartCoroutine(TurnEndInterval());
             if(TurnNumber == MAX_TURN)
             {
-                SceneControl.SwitchSceneWithoutConfirm("SettlementScene", () => { SettlementManager.SettleGame(DataRepeater.Instance.CurrentLevelId, UsedCards); });
+                if(GameProgressData.Instance.RoundDataList.Count < 5) SceneControl.SwitchSceneWithoutConfirm("SettlementScene", () => { SettlementManager.SettleGame(DataRepeater.Instance.CurrentLevelId, UsedCards); });
+                if (GameProgressData.Instance.RoundDataList.Count == 5) SceneControl.SwitchSceneWithoutConfirm("EndScene");
             }
         }
     }
@@ -183,7 +184,7 @@ public class CardController: MonoBehaviour
             if(cards[0].turnEndFinished && cards[1].turnEndFinished && cards[2].turnEndFinished)
             {
                 TurnNumber += 1;
-                Debug.Log(TurnNumber);
+                //Debug.Log(TurnNumber);
                 TurnEnd = false;
                 List<Rakugo> drawCard = Dealer();
                 for (int i = 0; i < cards.Length; i++)

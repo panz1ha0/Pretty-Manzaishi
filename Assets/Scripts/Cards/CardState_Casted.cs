@@ -13,6 +13,7 @@ public class CardState_Casted : CardState
     public override void Enter()
     {
         base.Enter();
+        AudioManager.Instance.PlaySFX("PlayedCard");
         stateMachine.SetBurnSpeed(DissolveSpeed);
         // card.localScale = new Vector3(Scale, Scale, Scale);
         stateMachine.StartDissolve(true);

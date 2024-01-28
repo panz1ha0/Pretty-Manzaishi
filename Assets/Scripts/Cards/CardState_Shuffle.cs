@@ -14,6 +14,11 @@ public class CardState_Shuffle: CardState
         base.Enter();
         currentPosition = card.localPosition;
     }
+    public override void Exit()
+    {
+        base.Exit();
+        AudioManager.Instance.PlaySFX("DrawCard");
+    }
     public override void LogicUpdate()
     {
         base.LogicUpdate();

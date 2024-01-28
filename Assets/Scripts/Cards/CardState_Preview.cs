@@ -14,6 +14,7 @@ public class CardState_Preview : CardState
     public override void Enter()
     {
         base.Enter();
+        AudioManager.Instance.PlaySFX("OnHoverCard");
         //canvas = card.GetComponent<Canvas>();
         //canvas.sortingOrder = 1;
         image.transform.localScale = new Vector3(PREVIEW_SCALE, PREVIEW_SCALE, PREVIEW_SCALE);

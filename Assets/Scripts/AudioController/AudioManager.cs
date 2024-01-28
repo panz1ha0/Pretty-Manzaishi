@@ -22,7 +22,7 @@ public class AudioManager : MonoBehaviour
         }
     }
     public void PlayMusic_1(){
-        musicSource1.volume = 0.8f;
+        musicSource1.volume = 0.7f;
         musicSource1.clip = musicSounds[0].clip;
         musicSource1.Play();
     }
@@ -37,11 +37,11 @@ public class AudioManager : MonoBehaviour
         PlayMusic_2();
     }
     public void SwitchMusic(){
-        CrossFadeMusic(musicSource1, musicSource2, 0.8f);
+        CrossFadeMusic(musicSource1, musicSource2, 0.7f);
     }
     private void CrossFadeMusic(AudioSource sourceA, AudioSource sourceB, float targetVolume)
     {
-        Debug.Log("Target at fading");
+        //Debug.Log("Target at fading");
         if (sourceA.isPlaying || sourceB.volume == 0)
         {
             StartCoroutine(FadeVolume(sourceA, 0, 0.2f));
@@ -57,15 +57,16 @@ public class AudioManager : MonoBehaviour
     private IEnumerator FadeVolume(AudioSource source, float targetVolume, float speed)
     {
         float startVolume = source.volume;
-        Debug.Log("fading start at"+source.volume);
+        //Debug.Log("fading start at"+source.volume);
         while (!Mathf.Approximately(source.volume, targetVolume))
         {
+            Debug.Log("3");
             source.volume = Mathf.Lerp(startVolume, targetVolume, speed);
             startVolume = source.volume;
             yield return new WaitForFixedUpdate();
         }
         source.volume = targetVolume;
-        Debug.Log("fading end at"+source.volume);
+        //Debug.Log("fading end at"+source.volume);
     }
 
     public void PlaySFX(string name){

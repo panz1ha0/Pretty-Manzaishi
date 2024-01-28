@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47de07cf5d66b284f9c463c31a5c8c97, type: 3}
   m_Name: CardState_Preview 3
   m_EditorClassIdentifier: 
+  SFXname: OnHoverCard
   upmove: 110
   speed: 100

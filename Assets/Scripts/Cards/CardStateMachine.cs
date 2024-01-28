@@ -86,6 +86,7 @@ public class CardStateMachine: StateMachine
         }
         if (startDissolve && !unburn)
         {
+            Debug.Log(transform.gameObject.name + " disslove");
             StartCoroutine(Dissolve());
             startDissolve = material.GetFloat("_BurnAmount") < 1;
             Debug.Log(DissolveEnd());

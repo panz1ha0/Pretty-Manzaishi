@@ -92,18 +92,17 @@ public partial class SettlementSceneController : MonoBehaviour
 
     IEnumerator ActionCoroutine(int score, int fans, int deltaFans, string tachieWords, int nextLevelId)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
 
         yield return CanvasGroupHelper.FadeCanvasGroup(canvasGroup, 1, 0.2f);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
 
         yield return CanvasGroupHelper.FadeCanvasGroup(scoreCanvasGroup, 1, 0.2f);
         yield return new WaitForSeconds(0.3f);
         yield return StepNumber(mScore, 0, score);
 
         yield return new WaitForSeconds(0.5f);
-
         mFans.SetText(fans.ToString());
         yield return CanvasGroupHelper.FadeCanvasGroup(fansCanvasGroup, 1, 0.2f);
         yield return new WaitForSeconds(0.3f);
@@ -173,14 +172,16 @@ public partial class SettlementSceneController
     {
         text.SetText(origin.ToString());
         var currentValue = origin;
-
+        int count = 0;
         if (currentValue < target)
         {
             while (Mathf.Abs(currentValue / (float) target) <= 0.95f)
             {
                 text.SetText(currentValue.ToString());
-
+                Debug.Log("1");
                 currentValue = Mathf.RoundToInt(Mathf.Lerp(currentValue, target, 0.1f));
+                count++;
+                if(count >= 100) { break; }
                 yield return new WaitForFixedUpdate();
             }
         }
@@ -189,8 +190,10 @@ public partial class SettlementSceneController
             while (Mathf.Abs((float) target / currentValue) <= 0.95f)
             {
                 text.SetText(currentValue.ToString());
-
+                Debug.Log("2");
                 currentValue = Mathf.RoundToInt(Mathf.Lerp(currentValue, target, 0.1f));
+                count++;
+                if (count >= 100) { break; }
                 yield return new WaitForFixedUpdate();
             }
         }
