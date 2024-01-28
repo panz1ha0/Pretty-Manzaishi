@@ -9,7 +9,7 @@ public class CardState_Casted : CardState
 {
     [SerializeField] float DissolveSpeed;
     [SerializeField] Vector3 position;
-    [SerializeField] float Scale;
+    //[SerializeField] float Scale;
     public override void Enter()
     {
         base.Enter();

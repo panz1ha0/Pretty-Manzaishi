@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Kuchinashi;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,7 +22,7 @@ public class TutorialManager : MonoBehaviour
 
         currentPage = 0;
 
-        if (DataRepeater.Instance.LevelCount == 0)
+        if (GameProgressData.Instance.RoundDataList == null || GameProgressData.Instance.RoundDataList.Count == 0)
         {
             image.sprite = TutorialImages[currentPage];
             StartCoroutine(CanvasGroupHelper.FadeCanvasGroupWithButton(canvasGroup, button, 1f, 0.1f));
@@ -37,6 +35,7 @@ public class TutorialManager : MonoBehaviour
                 else
                 {
                     StartCoroutine(CanvasGroupHelper.FadeCanvasGroupWithButton(canvasGroup, button, 0f, 0.1f));
+                    transform.parent.GetComponent<CardController>().avtivateCards();
                 }
             });
         }

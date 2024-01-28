@@ -18,19 +18,21 @@ public class CardController: MonoBehaviour
     int level;
     CardStateMachine[] cards;
     bool TurnEnd;
-    const int MAX_TURN = 5;
+    bool onTutorial;
+    const int MAX_TURN = 1;
     int TurnNumber = 0;
 
     private float startTime;
     private float duration => Time.time - startTime;
     private bool first;
     private bool startFirstTurn => duration >= 2.0f;
-
+    public bool CanPreView;
     public Sprite[] sprites;
     public RectTransform rectTransform;
 
     private void Awake()
     {
+        CanPreView = true;
         RakugoList = GameDesignData.Instance.RakugoList;
         UsedCards = new List<int>(RakugoList.Count);
         cardInput = GetComponent<CardInput>();
@@ -48,10 +50,11 @@ public class CardController: MonoBehaviour
             DataRepeater.Instance.CurrentElements.Cold = 0;
             DataRepeater.Instance.CurrentElements.Nonsense = 0;
         }
-        if (GameProgressData.Instance.RoundDataList.Count == 0)
+        if (GameProgressData.Instance.RoundDataList.Count == 0 || GameProgressData.Instance.RoundDataList == null)
         {
             int radNum = Random.Range(0, 5);
             DataRepeater.Instance.CurrentLevelId = radNum;
+            onTutorial = true;
         }
         else
         {
@@ -74,7 +77,7 @@ public class CardController: MonoBehaviour
             }
             first = false;
         }
-        CheckHoverInThisCrd(transform.gameObject);
+        if(!onTutorial) CheckHoverInThisCrd(transform.gameObject);
         //Debug.Log("isPreviewing: " + isPreviewing);
     }
 
@@ -94,8 +97,9 @@ public class CardController: MonoBehaviour
             StartCoroutine(TurnEndInterval());
             if(TurnNumber == MAX_TURN)
             {
-                if(GameProgressData.Instance.RoundDataList.Count < 5) SceneControl.SwitchSceneWithoutConfirm("SettlementScene", () => { SettlementManager.SettleGame(DataRepeater.Instance.CurrentLevelId, UsedCards); });
-                if (GameProgressData.Instance.RoundDataList.Count == 5) SceneControl.SwitchSceneWithoutConfirm("EndScene");
+                if (GameProgressData.Instance.RoundDataList.Count < 5) SceneControl.SwitchSceneWithoutConfirm("SettlementScene", () => { 
+                    SettlementManager.SettleGame(DataRepeater.Instance.CurrentLevelId, UsedCards);
+                });
             }
         }
     }
@@ -156,6 +160,17 @@ public class CardController: MonoBehaviour
         }
     }
 
+    public void SetDetailedPanel(Rakugo rakugo)
+    {
+        TMP_Text text = GameObject.Find("DetailedPreview").GetComponentInChildren<TMP_Text>();
+        text.SetText($"{rakugo.Content}");
+    }
+    public void SetDetailedPanel()
+    {
+        TMP_Text text = GameObject.Find("DetailedPreview").GetComponentInChildren<TMP_Text>();
+        text.SetText("");
+    }
+    public void avtivateCards() => onTutorial = false;
     private List<Rakugo> Dealer()
     {
         List<int> temp = new List<int>();

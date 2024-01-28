@@ -5,7 +5,13 @@ public class CardState_Drag : CardState
 {
     public override void Enter()
     {
+        cardController.CanPreView = false;
         base.Enter();
+    }
+    public override void Exit()
+    {
+        cardController.CanPreView = true;
+        base.Exit();
     }
     public override void LogicUpdate()
     {

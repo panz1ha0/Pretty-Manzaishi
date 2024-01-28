@@ -29,18 +29,14 @@ public class CardState_Shuffle: CardState
             Color currentColor = image.color;
             currentColor.a = 0;
             image.color = currentColor;
-            Color textColor = content.color;
-            textColor.a = 0;
-            content.color = textColor;
+            content.gameObject.GetComponent<CanvasGroup>().alpha = 0;
         }
         if (onPosition)
         {
             Color currentColor = image.color;
             currentColor.a = 0;
             image.color = currentColor;
-            Color textColor = content.color;
-            textColor.a = 0;
-            content.color = textColor;
+            content.gameObject.GetComponent<CanvasGroup>().alpha = 0;
             stateMachine.turnEndFinished = true;
         }
         if (!stateMachine.turnEnd && stateMachine.unburn && onPosition)

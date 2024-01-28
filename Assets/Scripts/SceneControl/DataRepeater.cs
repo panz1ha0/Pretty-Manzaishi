@@ -20,5 +20,10 @@ namespace Kuchinashi
 
         public Element CurrentElements;
         public int CurrentFans;
+
+        private void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
     }
 }

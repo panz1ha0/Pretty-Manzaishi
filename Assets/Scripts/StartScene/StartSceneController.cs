@@ -91,6 +91,8 @@ public class StartSceneController : MonoBehaviour
 
         mCanvasAnimator.speed = 0;
 
+        GameProgressData.Initialize();
+
         SceneControl.SwitchSceneWithoutConfirm("MainScene");
     }
 

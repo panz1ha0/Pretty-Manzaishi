@@ -74,9 +74,9 @@ public partial class SettlementSceneController : MonoBehaviour
         mNextLevelButton.onClick.RemoveAllListeners();
     }
 
-    public static void Action(int score, int fans, int deltaFans, string tachieWords, int nextLevelId)
+    public static void Action(int score, int fans, int deltaFans, string tachieWords)
     {
-        _instance.StartCoroutine(_instance.ActionCoroutine(score, fans, deltaFans, tachieWords, nextLevelId));
+        _instance.StartCoroutine(_instance.ActionCoroutine(score, fans, deltaFans, tachieWords));
 
         _instance.mNextLevelButton.interactable = true;
         _instance.mNextLevelButton.onClick.AddListener(() =>
@@ -86,11 +86,26 @@ public partial class SettlementSceneController : MonoBehaviour
             var animator = _instance.mNextLevelButton.GetComponent<Animator>();
             animator.enabled = true;
             animator.Play("Pressed");
+        });
+    }
+
+    public static void Action(int score, int fans, int deltaFans, string tachieWords, int nextLevelId)
+    {
+        _instance.StartCoroutine(_instance.ActionCoroutine(score, fans, deltaFans, tachieWords, nextLevelId));
+
+        _instance.mNextLevelButton.interactable = true;
+        _instance.mNextLevelButton.onClick.AddListener(() =>
+        {
+            //AudioManager.Instance.SwitchMusic();
+            _instance.mNextLevelButton.interactable = false;
+            var animator = _instance.mNextLevelButton.GetComponent<Animator>();
+            animator.enabled = true;
+            animator.Play("Pressed");
             SceneControl.SwitchSceneWithoutConfirm("MainScene", () => { DataRepeater.Instance.CurrentLevelId = nextLevelId; });
         });
     }
 
-    IEnumerator ActionCoroutine(int score, int fans, int deltaFans, string tachieWords, int nextLevelId)
+    IEnumerator ActionCoroutine(int score, int fans, int deltaFans, string tachieWords)
     {
         yield return new WaitForSeconds(1.5f);
 
@@ -107,6 +122,42 @@ public partial class SettlementSceneController : MonoBehaviour
         yield return CanvasGroupHelper.FadeCanvasGroup(fansCanvasGroup, 1, 0.2f);
         yield return new WaitForSeconds(0.3f);
         yield return FadeDeltaFans(deltaFans);
+        yield return new WaitForSeconds(0.3f);
+        yield return StepNumber(mFans, fans, fans + deltaFans);
+
+        yield return new WaitForSeconds(0.5f);
+
+        yield return CanvasGroupHelper.FadeCanvasGroup(tachieCanvasGroup, 1, 0.05f);
+        yield return new WaitForSeconds(0.5f);
+        yield return CanvasGroupHelper.FadeCanvasGroup(tachieWordsCanvasGroup, 1, 0.05f);
+        yield return new WaitForSeconds(0.3f);
+        yield return TypeText(mTachieWords, tachieWords);
+
+        yield return new WaitForSeconds(1f);
+
+        SceneControl.SwitchSceneWithoutConfirm("EndScene");
+    }
+
+    IEnumerator ActionCoroutine(int score, int fans, int deltaFans, string tachieWords, int nextLevelId)
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        yield return CanvasGroupHelper.FadeCanvasGroup(canvasGroup, 1, 0.2f);
+
+        yield return new WaitForSeconds(0.7f);
+
+        yield return CanvasGroupHelper.FadeCanvasGroup(scoreCanvasGroup, 1, 0.2f);
+        yield return new WaitForSeconds(0.3f);
+        AudioManager.Instance.PlaySFX("ShowText");
+        yield return StepNumber(mScore, 0, score);
+
+        yield return new WaitForSeconds(0.5f);
+        mFans.SetText(fans.ToString());
+        AudioManager.Instance.PlaySFX("ShowText");
+        yield return CanvasGroupHelper.FadeCanvasGroup(fansCanvasGroup, 1, 0.2f);
+        yield return new WaitForSeconds(0.3f);
+        yield return FadeDeltaFans(deltaFans);
+        AudioManager.Instance.PlaySFX("ShowText");
         yield return new WaitForSeconds(0.3f);
         yield return StepNumber(mFans, fans, fans + deltaFans);
 
@@ -178,11 +229,11 @@ public partial class SettlementSceneController
             while (Mathf.Abs(currentValue / (float) target) <= 0.95f)
             {
                 text.SetText(currentValue.ToString());
-                Debug.Log("1");
+                //Debug.Log("1");
                 currentValue = Mathf.RoundToInt(Mathf.Lerp(currentValue, target, 0.1f));
                 count++;
-                if(count >= 100) { break; }
-                yield return new WaitForFixedUpdate();
+                if(currentValue >= 0.9 * target || count >= 100) { break; }
+                yield return null;
             }
         }
         else
@@ -190,11 +241,11 @@ public partial class SettlementSceneController
             while (Mathf.Abs((float) target / currentValue) <= 0.95f)
             {
                 text.SetText(currentValue.ToString());
-                Debug.Log("2");
+                //Debug.Log("2");
                 currentValue = Mathf.RoundToInt(Mathf.Lerp(currentValue, target, 0.1f));
                 count++;
-                if (count >= 100) { break; }
-                yield return new WaitForFixedUpdate();
+                if (target >= 0.9 * currentValue || count >= 100) { break; }
+                yield return null;
             }
         }
 

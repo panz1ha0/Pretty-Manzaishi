@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ZukanScene.unity
     guid: 8092be67c53f5824cae458b6f9afbb22
+  - enabled: 1
+    path: Assets/Scenes/EndScene.unity
+    guid: 3f71f3fae7fb12b449eb244bbfe3632b
   m_configObjects: {}

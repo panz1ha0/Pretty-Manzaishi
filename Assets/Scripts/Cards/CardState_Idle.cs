@@ -19,11 +19,10 @@ public class CardState_Idle : CardState
         Color currentColor = image.color;
         currentColor.a = 100;
         image.color = currentColor;
-        Color textColor = content.color;
-        textColor.a = 100;
-        content.color = textColor;
+        content.gameObject.GetComponent<CanvasGroup>().alpha = 1;
         material = image.material;
         image.transform.localScale = Vector3.one;
+        content.rectTransform.localScale = Vector3.one;
         currentPosition = card.localPosition;
 
         material.SetFloat("_BurnAmount", 0);
@@ -32,7 +31,7 @@ public class CardState_Idle : CardState
     {
         base.LogicUpdate();
         onPosition = currentPosition == position;
-        if(onPosition && stateMachine.isPreviewing)
+        if(onPosition && stateMachine.isPreviewing && cardController.CanPreView)
         {
             stateMachine.SwitchState(typeof(CardState_Preview));
         }

@@ -15,6 +15,11 @@ public class GameProgressData
     public List<RoundData> RoundDataList = new List<RoundData>();
     public Dictionary<int, bool> UnlockedRakugo = new Dictionary<int, bool>();
 
+    public static void Initialize()
+    {
+        Instance.RoundDataList = new List<RoundData>();
+    }
+
     public static void FinishRound(int levelId, List<int> usedRakugoId)
     {
         var round = new RoundData() {

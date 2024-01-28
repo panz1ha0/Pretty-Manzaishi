@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c792356595c210c42b971c707f0e8543, type: 3}
   m_Name: CardState_Idle 2
   m_EditorClassIdentifier: 
-  SFXname: DrawCard
   position: {x: 0, y: -500, z: 0}
-  speed: 1000
+  speed: 5000

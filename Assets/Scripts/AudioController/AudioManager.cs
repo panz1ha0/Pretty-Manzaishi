@@ -42,15 +42,15 @@ public class AudioManager : MonoBehaviour
     private void CrossFadeMusic(AudioSource sourceA, AudioSource sourceB, float targetVolume)
     {
         //Debug.Log("Target at fading");
-        if (sourceA.isPlaying || sourceB.volume == 0)
+        if (sourceB.volume == 0)
         {
-            StartCoroutine(FadeVolume(sourceA, 0, 0.2f));
-            StartCoroutine(FadeVolume(sourceB, targetVolume, 0.2f));
+            StartCoroutine(FadeVolume(sourceA, 0, 0.1f));
+            StartCoroutine(FadeVolume(sourceB, targetVolume, 0.1f));
         }
         else
         {
-            StartCoroutine(FadeVolume(sourceB, 0, 0.2f));
-            StartCoroutine(FadeVolume(sourceA, targetVolume, 0.2f));
+            StartCoroutine(FadeVolume(sourceB, 0, 0.1f));
+            StartCoroutine(FadeVolume(sourceA, targetVolume, 0.1f));
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using Kuchinashi;
+using Kuchinashi.SceneControl;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -10,6 +11,8 @@ public class EndController : MonoBehaviour
 {
     Image image;
     TMP_Text discription;
+    Button button;
+    bool canGoBack = false;
 
     string[] EndDiscriptions = new string[]
     {
@@ -32,12 +35,16 @@ public class EndController : MonoBehaviour
     {
         image = GameObject.Find("Image").GetComponent<Image>();
         discription = GameObject.Find("Discription").GetComponent<TMP_Text>();
+        button = GetComponentInChildren<Button>();
         Color color = image.color;
         color.a = 0;
         image.color = color;
-        color = discription.color;
-        color.a = 0;
-        discription.color = color;
+        discription.gameObject.GetComponent<CanvasGroup>().alpha = 0;
+        button.onClick.AddListener(() =>
+        {
+            SceneControl.SwitchSceneWithoutConfirm("StartScene");
+        });
+        button.gameObject.SetActive(false);
     }
     private void Start()
     {
@@ -45,7 +52,7 @@ public class EndController : MonoBehaviour
     }
     void Update()
     {
-        StartCoroutine(ShowEnd());
+        if (!canGoBack) StartCoroutine(ShowEnd());
     }
     private void ChooseEnd()
     {
@@ -58,52 +65,52 @@ public class EndController : MonoBehaviour
         if (Cold <= -15)
         {
             image.sprite = EndImage[0];
-            discription.SetText($"{EndDiscriptions[2]}");
+            discription.SetText($"{EndDiscriptions[2]}" + "\n\n" + "......点击以返回主菜单");
         }
         else if (Hell <= -15)
         {
             image.sprite = EndImage[0];
-            discription.SetText($"{EndDiscriptions[1]}");
+            discription.SetText($"{EndDiscriptions[1]}" + "\n\n" + "......点击以返回主菜单");
         }
         else if (Ero <= -15)
         {
             image.sprite = EndImage[0];
-            discription.SetText($"{EndDiscriptions[3]}");
+            discription.SetText($"{EndDiscriptions[3]}" + "\n\n" + "......点击以返回主菜单");
         }
         else if (Nonsense <= -15)
         {
             image.sprite = EndImage[0];
-            discription.SetText($"{EndDiscriptions[4]}");
+            discription.SetText($"{EndDiscriptions[4]}" + "\n\n" + "......点击以返回主菜单");
         }
         else if (FinalFans < 10000)
         {
             image.sprite = EndImage[0];
-            discription.SetText($"{EndDiscriptions[9]}");
+            discription.SetText($"{EndDiscriptions[9]}" + "\n\n" + "......点击以返回主菜单");
         }
         else if (Cold >= 15)
         {
             image.sprite = EndImage[2];
-            discription.SetText($"{EndDiscriptions[6]}");
+            discription.SetText($"{EndDiscriptions[6]}" + "\n\n" + "......点击以返回主菜单");
         }
         else if (Hell >= 15)
         {
             image.sprite = EndImage[4];
-            discription.SetText($"{EndDiscriptions[5]}");
+            discription.SetText($"{EndDiscriptions[5]}" + "\n\n" + "......点击以返回主菜单");
         }
         else if (Ero >= 15)
         {
             image.sprite = EndImage[3];
-            discription.SetText($"{EndDiscriptions[7]}");
+            discription.SetText($"{EndDiscriptions[7]}" + "\n\n" + "......点击以返回主菜单");
         }
         else if (Nonsense >= 15)
         {
             image.sprite = EndImage[5];
-            discription.SetText($"{EndDiscriptions[8]}");
+            discription.SetText($"{EndDiscriptions[8]}" + "\n\n" + "......点击以返回主菜单");
         }
         else
         {
             image.sprite = EndImage[1];
-            discription.SetText($"{EndDiscriptions[0]}");
+            discription.SetText($"{EndDiscriptions[0]}" + "\n\n" + "......点击以返回主菜单");
         }
     }
     IEnumerator ShowEnd()
@@ -112,17 +119,19 @@ public class EndController : MonoBehaviour
         while (image.color.a < 1)
         {
             Color color = image.color;
-            color.a += 0.5f * Time.deltaTime;
+            color.a += 0.1f * Time.deltaTime;
             image.color = color;
             yield return null;
         }
-        yield return new WaitForSeconds(1f);
-        while (discription.color.a < 1)
+
+        yield return new WaitForSeconds(2f);
+        while (discription.gameObject.GetComponent<CanvasGroup>().alpha < 1)
         {
-            Color color = discription.color;
-            color.a += 0.5f * Time.deltaTime;
-            discription.color = color;
-            yield return null;
+            discription.gameObject.GetComponent<CanvasGroup>().alpha += 0.1f * Time.deltaTime;
+            yield return new WaitForFixedUpdate();
         }
+        
+        button.gameObject.SetActive(true);
+        canGoBack = true;
     }
 }

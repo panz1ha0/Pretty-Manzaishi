@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 [CreateAssetMenu(menuName = "Data/CardState/Preview", fileName = "CardState_Preview")]
 public class CardState_Preview : CardState
@@ -15,11 +16,19 @@ public class CardState_Preview : CardState
     {
         base.Enter();
         AudioManager.Instance.PlaySFX("OnHoverCard");
+        cardController.CanPreView = false;
         //canvas = card.GetComponent<Canvas>();
         //canvas.sortingOrder = 1;
+        cardController.SetDetailedPanel(baseCard.rakugoData);
         image.transform.localScale = new Vector3(PREVIEW_SCALE, PREVIEW_SCALE, PREVIEW_SCALE);
+        content.rectTransform.localScale = new Vector3(PREVIEW_SCALE, PREVIEW_SCALE, PREVIEW_SCALE);
         currentPosition = card.localPosition;
         targetPositionY = currentPosition.y + upmove;
+    }
+    public override void Exit()
+    {
+        base.Exit();
+        cardController.SetDetailedPanel();
     }
     public override void LogicUpdate()
     {
@@ -27,6 +36,7 @@ public class CardState_Preview : CardState
         //currentPosition.y = Mathf.MoveTowards(currentPosition.y, targetPositionY, speed * Time.deltaTime);
         if (!stateMachine.isPreviewing)
         {
+            cardController.CanPreView = true;
             stateMachine.SwitchState(typeof(CardState_Idle));
         }
         if (playerInput.dragCard)

@@ -102,9 +102,7 @@ public class CardStateMachine: StateMachine
         {
             BurnAmount += BurnSpeed * Time.deltaTime;
             material.SetFloat("_BurnAmount", BurnAmount);
-            Color textColor = content.color;
-            textColor.a -= BurnSpeed * 255.0f * Time.deltaTime;
-            content.color = textColor;
+            content.gameObject.GetComponent<CanvasGroup>().alpha -= 2 * BurnSpeed * Time.deltaTime;
             yield return null;
         }
     }
