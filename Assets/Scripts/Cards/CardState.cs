@@ -19,6 +19,9 @@ public class CardState : ScriptableObject, ICardState
     protected CardInput playerInput;
     protected CardController cardController;
     protected BaseCard baseCard;
+    protected float startTime;
+    protected float duration => Time.time - startTime;
+
     public void Init(CardStateMachine stateMachine, Transform card, Image image, TMP_Text content, CardInput playerInput, CardController cardController, BaseCard baseCard)
     {
         this.stateMachine = stateMachine;
@@ -31,6 +34,7 @@ public class CardState : ScriptableObject, ICardState
     }
     public virtual void Enter()
     {
+        startTime = Time.time;
         //Debug.Log(card.gameObject.name + " enter state: " + this);
     }
 

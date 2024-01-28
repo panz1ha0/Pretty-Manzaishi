@@ -56,10 +56,12 @@ public class IndicatorListener : MonoBehaviour
         if (value >= HIGH)
         {
             image.sprite = sprites[0];
+            AudioManager.Instance.PlaySFX("AlertTooHigh");
         }
         else if (value <= LOW)
         {
             image.sprite = sprites[2];
+            AudioManager.Instance.PlaySFX("AlertTooLow");
         }
         else
         {

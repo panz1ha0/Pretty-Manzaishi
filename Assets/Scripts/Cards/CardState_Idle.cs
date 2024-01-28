@@ -39,11 +39,23 @@ public class CardState_Idle : CardState
         {
             stateMachine.SwitchState(typeof(CardState_Shuffle));
         }
-        currentPosition = Vector3.MoveTowards(currentPosition, position, speed * Time.deltaTime);
+        
     }
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        card.localPosition = currentPosition;
+        if (stateMachine.GetLastState().GetType() != typeof(CardState_Shuffle))
+        {
+            currentPosition = Vector3.MoveTowards(currentPosition, position, speed * Time.deltaTime);
+            card.localPosition = currentPosition;
+        }
+        else
+        {
+            if (duration >= 1.5f)
+            {
+                currentPosition = Vector3.MoveTowards(currentPosition, position, speed * Time.deltaTime);
+                card.localPosition = currentPosition;
+            }
+        }
     }
 }

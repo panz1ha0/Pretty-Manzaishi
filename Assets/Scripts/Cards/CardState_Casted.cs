@@ -13,10 +13,19 @@ public class CardState_Casted : CardState
     public override void Enter()
     {
         base.Enter();
+        cardController.CharacterTalk();
         AudioManager.Instance.PlaySFX("PlayedCard");
         stateMachine.SetBurnSpeed(DissolveSpeed);
         // card.localScale = new Vector3(Scale, Scale, Scale);
         stateMachine.StartDissolve(true);
+    }
+    public override void Exit()
+    {
+        base.Exit();
+        if (cardController.checkCardAndLevel(baseCard.rakugoData))
+        {
+            cardController.CrowdsLaugh();
+        }
     }
     public override void LogicUpdate()
     {

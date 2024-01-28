@@ -3,6 +3,7 @@ using Kuchinashi.SceneControl;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Xml.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -57,60 +58,61 @@ public class EndController : MonoBehaviour
     private void ChooseEnd()
     {
         Element FinalElement = DataRepeater.Instance.CurrentElements;
+        Debug.Log(FinalElement.Cold + " " + FinalElement.Ero + " " + FinalElement.Hell + " " + FinalElement.Nonsense);
         int FinalFans = DataRepeater.Instance.CurrentFans;
         int Cold = FinalElement.Cold;
         int Hell = FinalElement.Hell;
         int Ero = FinalElement.Ero;
         int Nonsense = FinalElement.Nonsense;
-        if (Cold <= -15)
+        if (Cold < -15)
         {
             image.sprite = EndImage[0];
-            discription.SetText($"{EndDiscriptions[2]}" + "\n\n" + "......点击以返回主菜单");
+            discription.SetText($"{EndDiscriptions[2]}" + "\n" + "......点击以返回主菜单");
         }
-        else if (Hell <= -15)
+        else if (Hell < -15)
         {
             image.sprite = EndImage[0];
-            discription.SetText($"{EndDiscriptions[1]}" + "\n\n" + "......点击以返回主菜单");
+            discription.SetText($"{EndDiscriptions[1]}" + "\n" + "......点击以返回主菜单");
         }
-        else if (Ero <= -15)
+        else if (Ero < -15)
         {
             image.sprite = EndImage[0];
-            discription.SetText($"{EndDiscriptions[3]}" + "\n\n" + "......点击以返回主菜单");
+            discription.SetText($"{EndDiscriptions[3]}" + "\n" + "......点击以返回主菜单");
         }
-        else if (Nonsense <= -15)
+        else if (Nonsense < -15)
         {
             image.sprite = EndImage[0];
-            discription.SetText($"{EndDiscriptions[4]}" + "\n\n" + "......点击以返回主菜单");
+            discription.SetText($"{EndDiscriptions[4]}" + "\n" + "......点击以返回主菜单");
+        }
+        else if (Cold > 15)
+        {
+            image.sprite = EndImage[2];
+            discription.SetText($"{EndDiscriptions[6]}" + "\n" + "......点击以返回主菜单");
+        }
+        else if (Hell > 15)
+        {
+            image.sprite = EndImage[4];
+            discription.SetText($"{EndDiscriptions[5]}" + "\n" + "......点击以返回主菜单");
+        }
+        else if (Ero > 15)
+        {
+            image.sprite = EndImage[3];
+            discription.SetText($"{EndDiscriptions[7]}" + "\n" + "......点击以返回主菜单");
+        }
+        else if (Nonsense > 15)
+        {
+            image.sprite = EndImage[5];
+            discription.SetText($"{EndDiscriptions[8]}" + "\n" + "......点击以返回主菜单");
         }
         else if (FinalFans < 10000)
         {
             image.sprite = EndImage[0];
-            discription.SetText($"{EndDiscriptions[9]}" + "\n\n" + "......点击以返回主菜单");
-        }
-        else if (Cold >= 15)
-        {
-            image.sprite = EndImage[2];
-            discription.SetText($"{EndDiscriptions[6]}" + "\n\n" + "......点击以返回主菜单");
-        }
-        else if (Hell >= 15)
-        {
-            image.sprite = EndImage[4];
-            discription.SetText($"{EndDiscriptions[5]}" + "\n\n" + "......点击以返回主菜单");
-        }
-        else if (Ero >= 15)
-        {
-            image.sprite = EndImage[3];
-            discription.SetText($"{EndDiscriptions[7]}" + "\n\n" + "......点击以返回主菜单");
-        }
-        else if (Nonsense >= 15)
-        {
-            image.sprite = EndImage[5];
-            discription.SetText($"{EndDiscriptions[8]}" + "\n\n" + "......点击以返回主菜单");
+            discription.SetText($"{EndDiscriptions[9]}" + "\n" + "......点击以返回主菜单");
         }
         else
         {
             image.sprite = EndImage[1];
-            discription.SetText($"{EndDiscriptions[0]}" + "\n\n" + "......点击以返回主菜单");
+            discription.SetText($"{EndDiscriptions[0]}" + "\n" + "......点击以返回主菜单");
         }
     }
     IEnumerator ShowEnd()

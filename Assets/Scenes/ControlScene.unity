@@ -1153,7 +1153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a0be532cc5d9a4c8f37963715c0192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelCount: 0
   CurrentLevelId: 0
   CurrentElements:
     Hell: 0

@@ -14,12 +14,16 @@ namespace Kuchinashi
             private set => _instance = value;
         }
 
-        public int LevelCount = 0;
-
         public int CurrentLevelId = 0;
 
         public Element CurrentElements;
         public int CurrentFans;
+
+        public static void Initialize()
+        {
+            Instance.CurrentFans = 0;
+            Instance.CurrentElements = new Element();
+        }
 
         private void Awake()
         {

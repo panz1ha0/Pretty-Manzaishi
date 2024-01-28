@@ -15,11 +15,13 @@ public class CardController: MonoBehaviour
     List<Rakugo> RakugoList;
     List<int> UsedCards;
     CardInput cardInput;
-    int level;
+    
     CardStateMachine[] cards;
     bool TurnEnd;
     bool onTutorial;
-    const int MAX_TURN = 1;
+    Animator[] crowd_Animator;
+    Animator character_Animator;
+    const int MAX_TURN = 5;
     int TurnNumber = 0;
 
     private float startTime;
@@ -29,7 +31,7 @@ public class CardController: MonoBehaviour
     public bool CanPreView;
     public Sprite[] sprites;
     public RectTransform rectTransform;
-
+    public int level;
     private void Awake()
     {
         CanPreView = true;
@@ -37,6 +39,8 @@ public class CardController: MonoBehaviour
         UsedCards = new List<int>(RakugoList.Count);
         cardInput = GetComponent<CardInput>();
         cards = GetComponentsInChildren<CardStateMachine>();
+        crowd_Animator = new Animator[] { GameObject.Find("crowds").GetComponent<Animator>(), GameObject.Find("crowds (1)").GetComponent<Animator>(), GameObject.Find("crowds (2)").GetComponent<Animator>() };
+        character_Animator = GameObject.Find("Character").GetComponent<Animator>();
         first = true;
         foreach (CardStateMachine item in cards)
         {
@@ -53,6 +57,7 @@ public class CardController: MonoBehaviour
         if (GameProgressData.Instance.RoundDataList.Count == 0 || GameProgressData.Instance.RoundDataList == null)
         {
             int radNum = Random.Range(0, 5);
+            level = radNum;
             DataRepeater.Instance.CurrentLevelId = radNum;
             onTutorial = true;
         }
@@ -94,12 +99,23 @@ public class CardController: MonoBehaviour
             {
                 item.turnEnd = true;
             }
+            //StartCoroutine(WaitForShuffle());
             StartCoroutine(TurnEndInterval());
+            
+            Debug.Log(TurnNumber);
             if(TurnNumber == MAX_TURN)
             {
-                if (GameProgressData.Instance.RoundDataList.Count < 5) SceneControl.SwitchSceneWithoutConfirm("SettlementScene", () => { 
-                    SettlementManager.SettleGame(DataRepeater.Instance.CurrentLevelId, UsedCards);
-                });
+                if (GameProgressData.Instance.RoundDataList.Count < 5)
+                {
+                    if (checkElement())
+                    {
+                        SceneControl.SwitchSceneWithoutConfirm("EndScene");
+                    }
+                    SceneControl.SwitchSceneWithoutConfirm("SettlementScene", () =>
+                    {
+                        SettlementManager.SettleGame(DataRepeater.Instance.CurrentLevelId, UsedCards);
+                    });
+                }
             }
         }
     }
@@ -171,6 +187,16 @@ public class CardController: MonoBehaviour
         text.SetText("");
     }
     public void avtivateCards() => onTutorial = false;
+
+    public bool checkCardAndLevel(Rakugo rakugo)
+    {
+        if (level == 0) return true;
+        if (rakugo.Type == Type.Cold && level == 2) return true;
+        else if (rakugo.Type == Type.Ero && level == 3) return true;
+        else if (rakugo.Type == Type.Hell && level == 1) return true;
+        else if (rakugo.Type == Type.Nonsense && level == 4) return true;
+        else return false;
+    }
     private List<Rakugo> Dealer()
     {
         List<int> temp = new List<int>();
@@ -191,6 +217,14 @@ public class CardController: MonoBehaviour
             if (rakugos.Count == 3) return rakugos;
         }
     }
+    public void CrowdsLaugh()
+    {
+        foreach (var item in crowd_Animator)
+        {
+            item.SetTrigger("laugh");
+        }
+    }
+    public void CharacterTalk() => character_Animator.SetTrigger("talk");
 
     IEnumerator TurnEndInterval()
     {
@@ -199,7 +233,6 @@ public class CardController: MonoBehaviour
             if(cards[0].turnEndFinished && cards[1].turnEndFinished && cards[2].turnEndFinished)
             {
                 TurnNumber += 1;
-                //Debug.Log(TurnNumber);
                 TurnEnd = false;
                 List<Rakugo> drawCard = Dealer();
                 for (int i = 0; i < cards.Length; i++)
@@ -210,6 +243,15 @@ public class CardController: MonoBehaviour
             }
             yield return null;
         }
-        
+    }
+    private bool checkElement()
+    {
+        Element element = DataRepeater.Instance.CurrentElements;
+        Debug.Log(element.Cold + " " + element.Ero + " " + element.Hell + " " + element.Nonsense);
+        return (element.Ero < -15 || element.Ero > 15 || element.Cold < -15 || element.Cold > 15 || element.Hell < -15 || element.Hell > 15 || element.Nonsense < -15 || element.Nonsense > 15);
+    }
+    IEnumerator WaitForShuffle()
+    {
+        yield return new WaitForSeconds(1.5f);
     }
 }
