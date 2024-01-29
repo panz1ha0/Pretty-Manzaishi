@@ -1,13 +1,11 @@
-using JetBrains.Annotations;
+
 using Kuchinashi;
 using Kuchinashi.SceneControl;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class CardController: MonoBehaviour
@@ -42,10 +40,10 @@ public class CardController: MonoBehaviour
         crowd_Animator = new Animator[] { GameObject.Find("crowds").GetComponent<Animator>(), GameObject.Find("crowds (1)").GetComponent<Animator>(), GameObject.Find("crowds (2)").GetComponent<Animator>() };
         character_Animator = GameObject.Find("Character").GetComponent<Animator>();
         first = true;
-        foreach (CardStateMachine item in cards)
-        {
-            item.Init();
-        }
+        //foreach (CardStateMachine item in cards)
+        //{
+        //    item.Init();
+        //}
         if (DataRepeater.Instance.CurrentElements == null)
         {
             DataRepeater.Instance.CurrentElements = new Element();
@@ -111,7 +109,7 @@ public class CardController: MonoBehaviour
                     {
                         SceneControl.SwitchSceneWithoutConfirm("EndScene");
                     }
-                    SceneControl.SwitchSceneWithoutConfirm("SettlementScene", () =>
+                    else SceneControl.SwitchSceneWithoutConfirm("SettlementScene", () =>
                     {
                         SettlementManager.SettleGame(DataRepeater.Instance.CurrentLevelId, UsedCards);
                     });

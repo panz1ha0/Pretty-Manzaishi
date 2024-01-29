@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "Data/CardState/Shuffle", fileName = "CardState_Shuffle")]
 public class CardState_Shuffle: CardState
@@ -22,7 +21,6 @@ public class CardState_Shuffle: CardState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        currentPosition = Vector3.MoveTowards(currentPosition, position, speed * Time.deltaTime);
         onPosition = currentPosition == position;
         if (stateMachine.GetLastState()?.GetType() == typeof(CardState_Casted))
         {
@@ -47,6 +45,7 @@ public class CardState_Shuffle: CardState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+        currentPosition = Vector3.MoveTowards(currentPosition, position, speed * Time.deltaTime);
         card.localPosition = currentPosition;
     }
 }

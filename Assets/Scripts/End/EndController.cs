@@ -44,6 +44,7 @@ public class EndController : MonoBehaviour
         button.onClick.AddListener(() =>
         {
             SceneControl.SwitchSceneWithoutConfirm("StartScene");
+            button.gameObject.SetActive(false);
         });
         button.gameObject.SetActive(false);
     }
@@ -58,7 +59,7 @@ public class EndController : MonoBehaviour
     private void ChooseEnd()
     {
         Element FinalElement = DataRepeater.Instance.CurrentElements;
-        Debug.Log(FinalElement.Cold + " " + FinalElement.Ero + " " + FinalElement.Hell + " " + FinalElement.Nonsense);
+        //Debug.Log(FinalElement.Cold + " " + FinalElement.Ero + " " + FinalElement.Hell + " " + FinalElement.Nonsense);
         int FinalFans = DataRepeater.Instance.CurrentFans;
         int Cold = FinalElement.Cold;
         int Hell = FinalElement.Hell;

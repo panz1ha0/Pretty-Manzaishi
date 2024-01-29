@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using LitJson;
 
+using System.Collections.Generic;
 public class GameProgressData
 {
     private static GameProgressData _instance;

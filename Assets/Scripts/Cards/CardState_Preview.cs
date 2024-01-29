@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
-using TMPro;
 
 [CreateAssetMenu(menuName = "Data/CardState/Preview", fileName = "CardState_Preview")]
 public class CardState_Preview : CardState

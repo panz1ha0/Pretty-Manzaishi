@@ -1,9 +1,5 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.VersionControl.Asset;
-using UnityEngine.InputSystem;
-using UnityEngine.Playables;
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
@@ -32,6 +28,15 @@ public class CardStateMachine: StateMachine
     public void SetBurnSpeed(float burnSpeed) => BurnSpeed = burnSpeed;
     public CardState[] cardStates;
 
+    
+
+    public void Restart(Rakugo rakugo)
+    {
+        LoadCard(rakugo);
+        cardController.SetCardImage(rakugo.Type, image);
+        cardController.SetCardContent(rakugo, content);
+        SwitchState(typeof(CardState_Shuffle));
+    }
     public void Init()
     {
         unburn = true;
@@ -44,15 +49,6 @@ public class CardStateMachine: StateMachine
         BurnAmount = 0;
         baseCard.Init();
     }
-
-    public void Restart(Rakugo rakugo)
-    {
-        LoadCard(rakugo);
-        cardController.SetCardImage(rakugo.Type, image);
-        cardController.SetCardContent(rakugo, content);
-        SwitchState(typeof(CardState_Shuffle));
-    }
-
     private void Awake()
     {
         card = GetComponent<Transform>();

@@ -16,7 +16,7 @@ public class IndicatorListener : MonoBehaviour
 {
     CardController cardController;
     Image image;
-    Element currentElements;
+    Element currentElements = new Element();
 
     public Sprite[] sprites;
     public Type type;
@@ -29,8 +29,13 @@ public class IndicatorListener : MonoBehaviour
     }
     void Update()
     {
+        if (currentElements != DataRepeater.Instance.CurrentElements)
+        {
+            CheckElements(currentElements, type);
+            currentElements = DataRepeater.Instance.CurrentElements;
+        }
         currentElements = DataRepeater.Instance.CurrentElements;
-        CheckElements(currentElements, type);
+        //CheckElements(currentElements, type);
     }
 
     private void CheckElements(Element element, Type type)

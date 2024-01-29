@@ -1,8 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
-using UnityEditor;
-using Unity.VisualScripting;
-using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "Data/CardState/Idle", fileName = "CardState_Idle")]
 public class CardState_Idle : CardState

@@ -1,14 +1,11 @@
-using System.Collections;
-using Unity.VisualScripting.FullSerializer;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 [CreateAssetMenu(menuName = "Data/CardState/Casted", fileName = "CardState_Casted")]
 public class CardState_Casted : CardState
 {
     [SerializeField] float DissolveSpeed;
-    [SerializeField] Vector3 position;
+    //[SerializeField] Vector3 position;
     //[SerializeField] float Scale;
     public override void Enter()
     {
